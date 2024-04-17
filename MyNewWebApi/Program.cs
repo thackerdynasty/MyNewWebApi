@@ -9,15 +9,29 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddDbContext<AppDBContext>(options => options.UseSqlite("Data Source=PokemonApi.db"));
+builder.Services.AddDbContext<AppDBContext>(options => options.UseSqlite("Data Source=PokemonApi.db").EnableSensitiveDataLogging());
 
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope()) 
+{
+	var services = scope.ServiceProvider;
+	var context = services.GetRequiredService<AppDBContext>();
+	if (context.Pokemons.Count() == 0)
+	{
+		SeedData.Initialize(services);
+	}
+	else
+	{
+		Console.WriteLine("Database already seeded");
+	}
+}
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+	app.UseSwagger();
+	app.UseSwaggerUI();
 }
 
 app.UseHttpsRedirection();

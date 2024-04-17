@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MyNewWebApi.Models;
@@ -31,36 +26,71 @@ namespace MyNewWebApi.Controllers
         [Route("Electric")]
         public async Task<ActionResult<IEnumerable<Pokemon>>> GetElectricPokemon()
         {
-            return await _context.Pokemons.Where(p => p.Type == "electric" || p.Type2 == "electric").ToListAsync();
+            return await _context.Pokemons.Where(p => p.Type.ToLower() == "electric" || p.Type2.ToLower() == "electric").ToListAsync();
+        }
+        
+        [HttpGet]
+        [Route("Electric/Count")]
+        public async Task<ActionResult<int>> GetElectricPokemonCount()
+        {
+            return await _context.Pokemons.Where(p => p.Type.ToLower() == "electric" || p.Type2.ToLower() == "electric").CountAsync();
         }
 
 		[HttpGet]
 		[Route("Water")]
 		public async Task<ActionResult<IEnumerable<Pokemon>>> GetWaterPokemon()
 		{
-			return await _context.Pokemons.Where(p => p.Type == "water" || p.Type2 == "water").ToListAsync();
+			return await _context.Pokemons.Where(p => p.Type.ToLower() == "water" || p.Type2.ToLower() == "water").ToListAsync();
 		}
+        
+        [HttpGet]
+        [Route("Water/Count")]
+        public async Task<ActionResult<int>> GetWaterPokemonCount()
+        {
+            return await _context.Pokemons.Where(p => p.Type.ToLower() == "water" || p.Type2.ToLower() == "water").CountAsync();
+        }
 
 		[HttpGet]
 		[Route("Fire")]
 		public async Task<ActionResult<IEnumerable<Pokemon>>> GetFirePokemon()
 		{
-			return await _context.Pokemons.Where(p => p.Type == "fire" || p.Type2 == "fire").ToListAsync();
+			return await _context.Pokemons.Where(p => p.Type.ToLower() == "fire" || p.Type2.ToLower() == "fire").ToListAsync();
 		}
+        
+        [HttpGet]
+        [Route("Fire/Count")]
+        public async Task<ActionResult<int>> GetFirePokemonCount()
+        {
+            return await _context.Pokemons.Where(p => p.Type.ToLower() == "fire" || p.Type2.ToLower() == "fire").CountAsync();
+        }
 
 		[HttpGet]
 		[Route("Ground")]
 		public async Task<ActionResult<IEnumerable<Pokemon>>> GetGroundPokemon()
 		{
-			return await _context.Pokemons.Where(p => p.Type == "ground" || p.Type2 == "ground").ToListAsync();
+			return await _context.Pokemons.Where(p => p.Type.ToLower() == "ground" || p.Type2.ToLower() == "ground").ToListAsync();
 		}
+        
+        [HttpGet]
+        [Route("Ground/Count")]
+        public async Task<ActionResult<int>> GetGroundPokemonCount()
+        {
+            return await _context.Pokemons.Where(p => p.Type.ToLower() == "ground" || p.Type2.ToLower() == "ground").CountAsync();
+        }
 
 		[HttpGet]
 		[Route("Psychic")]
 		public async Task<ActionResult<IEnumerable<Pokemon>>> GetPsychicPokemon()
 		{
-			return await _context.Pokemons.Where(p => p.Type == "psychic" || p.Type2 == "psychic").ToListAsync();
+			return await _context.Pokemons.Where(p => p.Type.ToLower() == "psychic" || p.Type2.ToLower() == "psychic").ToListAsync();
 		}
+        
+        [HttpGet]
+        [Route("Psychic/Count")]
+        public async Task<ActionResult<int>> GetPsychicPokemonCount()
+        {
+            return await _context.Pokemons.Where(p => p.Type.ToLower() == "psychic" || p.Type2.ToLower() == "psychic").CountAsync();
+        }
 
 		// GET: api/Pokemon/5
 		[HttpGet("{id}")]

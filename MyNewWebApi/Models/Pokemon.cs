@@ -9,9 +9,11 @@ namespace MyNewWebApi.Models
 
 		[Required]
 		public string Name { get; set; }
-
+		
 		[Required]
-		public int Stage { get; set; }
+		public string Type { get; set; }
+
+		public string Type2 { get; set; }
 
 		[Required]
 		public int Hp { get; set; }
@@ -33,13 +35,6 @@ namespace MyNewWebApi.Models
 
 		[Required]
 		public bool Legendary { get; set; }
-
-		[Required]
-		public string Type { get; set; }
-
-		public string Type2 { get; set; }
-
-		public string imageUrl { get; set; }
 	}
 }
 
